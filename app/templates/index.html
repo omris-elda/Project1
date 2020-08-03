@@ -2,10 +2,17 @@
 
 {% block content %}
     <h1>Hello {{ current_user.username }}</h1>
-    {% for post in posts %}
+    <h3>Stock: </h3>
+    <hr>
+    {% for stockitem in stock %}
     <div>
         <p>
-            {{ post.author.username }} says: <b>{{ post.body }}</b>
+            <a href="{{ url_for('edit_product', product=stockitem.product_name) }}">
+            {{ stockitem.product_name }}</a>: {{ stockitem.current_stock }} <br>
+            {{ stockitem.product_price }}<br>
+            <a href="{{ url_for('supplier', supplier=stockitem.supplier.supplier_name) }}">
+            {{ stockitem.supplier.supplier_name }}</a>
+            <hr>
         </p>
     </div>
     {% endfor %}
