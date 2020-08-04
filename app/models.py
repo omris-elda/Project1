@@ -38,7 +38,7 @@ the stock table (which is below), which will allow for cross-referencing with ea
 """
 class Supplier(db.Model):
 
-    id = db.Column(db.Integer, primary_key = True)
+    supplier_id = db.Column(db.Integer, primary_key = True)
     supplier_name = db.Column(db.String(100), index = True, unique = True)
     supplier_description = db.Column(db.String(500))
     stock = db.relationship("Stock", backref="supplier", lazy="dynamic")
@@ -53,9 +53,9 @@ table allowing for easy cross-referencing.
 """
 class Stock(db.Model):
 
-    id = db.Column(db.Integer, primary_key = True)
+    product_id = db.Column(db.Integer, primary_key = True)
     product_name = db.Column(db.String(50), index = True, unique = True)
-    supplier_id = db.Column(db.Integer, db.ForeignKey("supplier.id"))
+    supplier_id = db.Column(db.Integer, db.ForeignKey("supplier.supplier_id"))
     product_price = db.Column(db.String(5))
     current_stock = db.Column(db.Integer)
     def __repr__(self):

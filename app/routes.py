@@ -106,23 +106,23 @@ def add_supplier():
 		flash("Supplier has been added.")
 		return redirect(url_for("add_supplier"))
 	return render_template("suppliers/add_supplier.html", title = "Add Supplier", form = form)
-
+# need to add validation so that I don't have to change my supplier name every time
 @app.route("/edit_supplier/<supplier_id>", methods = ["GET", "POST"])
 @login_required
 def edit_supplier(supplier_id):
-	supplier = Supplier.query.filter_by(supplier_id = supplier_id)
+	supplier = Supplier.query.filter_by(supplier_id = supplier_id).first()
 	form = EditSupplier()
 	if form.validate_on_submit():
 		supplier.supplier_name = form.supplier_name.data
 		supplier.supplier_description = form.supplier_description.data
 		db.session.commit()
+		flash("Supplier has been updated.")
 	elif request.method == "GET":
 		form.supplier_name.data = supplier.supplier_name
 		form.supplier_description.data = supplier.supplier_description
-	return render_template("edit_supplier.html", title = "Update Supplier", form = form)
+	return render_template("suppliers/edit_supplier.html", title = "Update Supplier", form = form)
 
-# also need a view supplier which hopefully shows everything that supplier provides
-# using the filter_by(supplier_name)
+# need to add validation so I don't have to change the product name every time
 @app.route("/edit_product/<product_id>", methods = ["GET", "POST"])
 @login_required
 def edit_product(product_id):
@@ -134,12 +134,55 @@ def edit_product(product_id):
 		product.supplier_name = form.supplier_name.data
 		product.current_stock = form.current_stock.data
 		db.session.commit()
+		flash("Stock has been updated.")
 		return redirect(url_for("edit_product", product_id = product_id))
 	elif request.method == "GET":
 		form.product_name.data = product.product_name
 		form.product_price.data = product.product_price
-		form.supplier_name.data = product.supplier_name
+		form.supplier_name.data = product.supplier.supplier_name
 		form.current_stock.data = product.current_stock
-	return render_template("edit_product.html", title = "Update Stock", form = form)
+	return render_template("stock/edit_product.html", title = "Update Stock", form = form)
 
 # also need a view product which will show the indiviual product and allow you to edit it from there
+@app.route("/product/<product_id>")
+@login_required
+def view_product(product_id):
+	productData = Stock.query.filter_by(product_id = product_id).first()
+	if productData is not None:
+		return render_template("stock/view_product.html", title = "Product Info", stock = productData)
+	else:
+		return render_template("404.html")
+
+@app.route("/supplier/<supplier_id>")
+@login_required
+def view_supplier(supplier_id):
+	supplierData = Supplier.query.filter_by(supplier_id = supplier_id).first()
+	supplierStock = Stock.query.filter_by(supplier_id = supplier_id).all()
+	if supplierData is not None and supplierStock is not None:
+		return render_template("suppliers/view_supplier.html", title = Supplier,  supplier = supplierData, stock = supplierStock)
+	else:
+		return render_template("404.html")
+
+
+@app.route("/supplier/delete/<supplier_id>")
+@login_required
+def delete_supplier(supplier_id):
+	if current_user.is_authenticated:
+		supplier = Supplier.query.filter_by(supplier_id = supplier_id).first()
+		supplierstock = Stock.query.filter_by(supplier_id = supplier_id).all()
+		for stock in supplierstock:
+			db.session.delete(stock)
+		db.session.delete(supplier)
+		db.session.commit()
+		flash("Supplier and associated stock has been deleted.")
+		return redirect(url_for("add_supplier"))
+
+@app.route("/product/delete/<product_id>")
+@login_required
+def delete_product(product_id):
+	if current_user.is_authenticated:
+		product = Stock.query.filter_by(product_id = product_id).first()
+		db.session.delete(product)
+		db.session.commit
+		flash("Stock has been deleted.")
+		return redirect(url_for("add_stock"))

@@ -114,7 +114,7 @@ issues that might arise from using the same form.
 class EditSupplier(FlaskForm):
     supplier_name = StringField("Supplier Name", validators = [DataRequired()])
     supplier_description = StringField("Supplier Description")
-    submit = SubmitField
+    submit = SubmitField("Edit Stock")
     
     def validate_supplier_name(self, supplier_name):
         supplier_name = Supplier.query.filter_by(supplier_name=supplier_name.data).first()
@@ -130,12 +130,13 @@ class EditStock(FlaskForm):
     supplier_name = StringField("Supplier", validators = [DataRequired()])
     product_price = StringField("Product Price", validators = [DataRequired()])
     current_stock = StringField("Current Stock")
-    submit = SubmitField("Add Product")
+    submit = SubmitField("Edit Product")
 
     def validate_product_name(self, product_name):
         product_name = Stock.query.filter_by(product_name=product_name.data).first()
-        if product_name:
-            raise ValidationError("A product with this name already exists.")
+        if product_name != self.product_name:
+            if product_name:
+                raise ValidationError("A product with this name already exists.")
 
     def validate_supplier_name(self, supplier_name):
         supplier_name = Supplier.query.filter_by(supplier_name=supplier_name.data).first()
