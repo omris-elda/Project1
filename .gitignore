@@ -1,0 +1,8 @@
+requirements.txt
+settings.json
+/pycache/
+*.pyc
+/venv/
+/.venv/
+/__pycache__/
+/migrations/
