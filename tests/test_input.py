@@ -137,4 +137,10 @@ class TestUserInput(TestBase):
             )
             self.assertIn(b"Home", response.data)
             self.assertEqual(response.status_code, 200)
-            
+
+"""tests for later if I get time:
+edit profile
+add stock
+edit product
+delete supplier
+delete product

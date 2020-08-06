@@ -36,9 +36,45 @@ class TestBase(LiveServerTestCase):
         chrome_options.add_argument("--headless")
         self.driver = webdriver.Chrome(executable_path="/home/edmundtheeel/chromedriver", chrome_options=chrome_options)
         self.driver.get("http://localhost:5000")
+
         db.session.commit()
         db.drop_all()
         db.create_all()
+
+        # creating the first test user
+        hashed_pw1 = generate_password_hash("admin")
+        admin = User(
+            username = "admin",
+            email = "admin@admin.com",
+            password_hash = hashed_pw1
+        )
+        # creating the second test user
+        hashed_pw_2 = generate_password_hash("password")
+        testuser = User(
+            username = "test",
+            email = "test@user.com",
+            password_hash = hashed_pw_2
+        )
+        # creating a test supplier
+        testsupplier = Supplier(
+            supplier_id = 1,
+            supplier_name = "TestSupplier",
+            supplier_description = "Test Supplier Description"
+        )
+        # creating a test product, linked to the test supplier
+        testproduct = Stock(
+            product_id = 1,
+            product_name = "Test Product",
+            product_price = 100.50,
+            current_stock = 5,
+            supplier_id = 1
+        )
+        # adds the test data to the database
+        db.session.add(admin)
+        db.session.add(testuser)
+        db.session.add(testsupplier)
+        db.session.add(testproduct)
+        db.session.commit()
 
     def tearDown(self):
         self.driver.quit()
