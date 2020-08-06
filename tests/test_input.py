@@ -144,3 +144,4 @@ add stock
 edit product
 delete supplier
 delete product
+"""
