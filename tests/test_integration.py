@@ -115,3 +115,19 @@ class TestNavBar(TestBase):
         self.driver.find_element_by_xpath('//*[@id="submit"]').click()
         # checks that you've logged in correctly
         assert url_for("index") in self.driver.current_url
+
+    def test_register(self):
+
+        self.driver.find_element_by_xpath("/html/body/div/a[3]").click()
+        assert url_for("register") in self.driver.current_url
+        # input the new test user
+        self.driver.find_element_by_xpath('//*[@id="username"]').send_keys("test user")
+        # input the test user email
+        self.driver.find_element_by_xpath('//*[@id="email"]').send_keys("test@test.com")
+        # input the test user password x2
+        self.driver.find_element_by_xpath('//*[@id="password"]').send_keys("password")
+        self.driver.find_element_by_xpath('//*[@id="password2"]').send_keys("password")
+        # click the register button
+        self.driver.find_element_by_xpath('//*[@id="submit"]').click()
+        # checks that you've made an account and been redirected to the login page
+        assert url_for("login") in self.driver.current_url
