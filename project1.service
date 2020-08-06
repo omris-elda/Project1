@@ -1,0 +1,14 @@
+[Unit]
+Description=Flask Application
+
+[Service]
+User=project1
+WorkingDirectory=/opt/project1
+EnvironmentFile=/opt/project1/flask.env
+ExecStart=/bin/sh \
+        -c 'cd /opt/project1 && \
+        . ./venv/bin/activate && \
+        gunicorn --workers=4 --bind=0.0.0.0:5000 app:app'
+
+[Install]
+WantedBy=multi-user.target
