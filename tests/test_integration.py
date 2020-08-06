@@ -44,9 +44,9 @@ class TestBase(LiveServerTestCase):
         self.driver.quit()
         print("<-----END OF TEST----->")
 
-    def test_server_is_up_and_running(self):
-        response = urlopen("http://localhost:5000")
-        self.assertEqual(response.code, 200)
+    # def test_server_is_up_and_running(self):
+    #     response = urlopen("http://localhost:5000")
+    #     self.assertEqual(response.code, 200)
 
 class TestHome(TestBase):
 
