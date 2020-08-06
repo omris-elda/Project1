@@ -10,6 +10,7 @@ from app import app, db
 from app.models import User, Stock, Supplier
 import os
 from config import Config
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # setting the test variables for test admin user
 test_admin_username =  "admin"
