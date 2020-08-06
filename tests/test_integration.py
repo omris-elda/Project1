@@ -8,6 +8,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from app import app, db
 from app.models import User, Stock, Supplier
+import os
 
 # setting the test variables for test admin user
 test_admin_first_name =  "admin"
