@@ -12,8 +12,7 @@ import os
 from config import Config
 
 # setting the test variables for test admin user
-test_admin_first_name =  "admin"
-test_admin_last_name = "admin"
+test_admin_username =  "admin"
 test_admin_email = "admin@admin.com"
 test_admin_password = "admin"
 
@@ -49,10 +48,33 @@ class TestBase(LiveServerTestCase):
     #     response = urlopen("http://localhost:5000")
     #     self.assertEqual(response.code, 200)
 
-class TestHome(TestBase):
+class TestNavBar(TestBase):
 
     def test_homelink(self):
         self.driver.find_element_by_xpath("/html/body/div[1]/a[1]").click()
 
         assert url_for("index") in self.driver.current_url
 
+    def test_registerlink(self):
+        self.driver.find_element_by_xpath("/html/body/div/a[3]").click()
+
+        assert url_for("register") in self.driver.current_url
+    
+    def test_loginlink(self):
+        self.driver.find_element_by_xpath("/html/body/div[1]/a[2]").click()
+
+        assert url_for("login") in self.driver.current_url
+
+    def test_login(self):
+
+        self.driver.find_element_by_xpath("/html/body/div[1]/a[2]").click()
+
+        assert url_for("login") in self.driver.current_url
+        # inputs the test admin username
+        self.driver.find_element_by_xpath('//*[@id="username"]').send_keys(test_admin_username)
+        # inputs the test admin password
+        self.driver.find_element_by_xpath('//*[@id="password"]').send_keys(test_admin_password)
+        # click the sign in button
+        self.driver.find_element_by_xpath('//*[@id="submit"]').click()
+        # checks that you've logged in correctly
+        assert url_for("index") in self.driver.current_url
