@@ -10,5 +10,5 @@ app.config.from_object(Config) # this imports the configuration options from the
 db = SQLAlchemy(app) # sets the database variable
 migrate = Migrate(app, db) # this is for updating the database if we need to change the schema
 login = LoginManager(app) # this manages logins
-
+login.login_view = "login"
 from app import routes, models, errors
