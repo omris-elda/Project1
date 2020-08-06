@@ -52,7 +52,7 @@ class TestBase(LiveServerTestCase):
 class TestHome(TestBase):
 
     def test_homelink(self):
-        self.drive.find_element_by_xpath("/html/body/div[1]/a[1]").click()
+        self.driver.find_element_by_xpath("/html/body/div[1]/a[1]").click()
 
         assert url_for("index") in self.driver.current_url
 
