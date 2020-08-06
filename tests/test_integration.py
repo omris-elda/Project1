@@ -9,7 +9,7 @@ from selenium.webdriver.chrome.options import Options
 from app import app, db
 from app.models import User, Stock, Supplier
 import os
-from app.config import Config
+from config import Config
 
 # setting the test variables for test admin user
 test_admin_first_name =  "admin"
