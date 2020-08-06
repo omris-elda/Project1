@@ -23,7 +23,7 @@ class TestBase(LiveServerTestCase):
         # edit the config so that you're not overwriting any important configurations,
         # and making a new local database for testing purposes
         app.config.from_object(Config)
-        app.config.update(SQLALCHEMY_DATABASE_URI='sqlite:///' + os.path.join(basedir, 'test_app.db'),
+        app.config.update(SQLALCHEMY_DATABASE_URI=os.environ.get("TEST_DATABASE_URI"),
         SECRET_KEY="test key",
         WTF_CSRF_ENABLED=False,
         DEBUG=True
