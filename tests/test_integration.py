@@ -139,3 +139,5 @@ class TestInput(TestBase):
         # checks that you've made an account and been redirected to the login page
         assert url_for("login") in self.driver.current_url
 
+if __name__ == "__main__":
+    unittest.main()
