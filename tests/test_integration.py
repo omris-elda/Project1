@@ -140,4 +140,4 @@ class TestInput(TestBase):
         assert url_for("login") in self.driver.current_url
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main(port=5000)
