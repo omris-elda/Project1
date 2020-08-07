@@ -12,7 +12,7 @@ import os
 from config import Config
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import logout_user
-# setting the test variables for test admin user
+# setting the test values
 test_admin_username =  "admin"
 test_admin_email = "admin@admin.com"
 test_admin_password = "admin"
@@ -180,4 +180,4 @@ class TestNewSupplier(TestBase):
         self.assertEqual(Supplier.query.count(), 2)
 
 if __name__ == "__main__":
-    unittest.main(port=5000)
+    unittest.main()
