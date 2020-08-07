@@ -246,7 +246,7 @@ class TestUserInput(TestBase):
             )
             self.assertIn(b"Home", response.data)
             self.assertEqual(response.status_code, 200)
-            response = self.client.post(
+            response = self.client.get(
                 url_for("delete_supplier", supplier_id = 1),
                 follow_redirects = True
             )
@@ -265,7 +265,8 @@ class TestUserInput(TestBase):
             )
             self.assertIn(b"Home", response.data)
             self.assertEqual(response.status_code, 200)
-            response = self.client.post(
+            
+            response = self.client.get(
                 url_for("delete_product", product_id = 1),
                 follow_redirects = True
             )
