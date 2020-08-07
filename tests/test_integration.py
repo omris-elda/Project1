@@ -93,11 +93,10 @@ class TestNavBar(TestBase):
 
         assert url_for("login") in self.driver.current_url
 
-class TestInput(TestBase):
+class TestRegister(TestBase):
 
     def test_register(self):
-        self.driver.find_element_by_xpath('/html/body/div[1]/a[2]').click()
-        
+               
         self.driver.find_element_by_xpath("/html/body/div/a[3]").click()
         # assert url_for("register") in self.driver.current_url
         assert url_for("register") in self.driver.current_url
@@ -113,6 +112,7 @@ class TestInput(TestBase):
         # checks that you've made an account and been redirected to the login page
         assert url_for("login") in self.driver.current_url
 
+class TestInput(TestBase):
 
     def test_login(self):
 
