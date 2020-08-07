@@ -58,11 +58,11 @@ class Stock(db.Model):
     supplier_id = db.Column(db.Integer, db.ForeignKey("supplier.supplier_id"))
     product_price = db.Column(db.String(5))
     current_stock = db.Column(db.Integer)
-    def __repr__(self):
-        output = "<Product: {}\n\r".format(self.product_name),
-        "<Supplier: {}\n\r".format(self.supplier_id),
-        "<Price: {}\n\r".format(self.product_price)
-        return output
+    # def __repr__(self):
+    #     output = "<Product: {}\n\r".format(self.product_name),
+    #     "<Supplier: {}\n\r".format(self.supplier_id),
+    #     "<Price: {}\n\r".format(self.product_price)
+    #     return output
 
 """
 Thanks to the flask-migrate extension, these database schemas can be quite
