@@ -89,7 +89,7 @@ def add_stock():
 		db.session.add(newstock)
 		db.session.commit()
 		flash("Stock has been added.")
-		return redirect(url_for("index"))
+		return redirect(url_for("add_stock"))
 	return render_template("stock/add_stock.html", title = "Add Stock", form = form)
 
 @app.route("/add_supplier", methods = ["GET", "POST"])
