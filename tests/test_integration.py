@@ -96,7 +96,8 @@ class TestNavBar(TestBase):
 class TestInput(TestBase):
 
     def test_register(self):
-        logout_user()
+        self.driver.find_element_by_xpath('/html/body/div[1]/a[2]').click()
+        
         self.driver.find_element_by_xpath("/html/body/div/a[3]").click()
         # assert url_for("register") in self.driver.current_url
         assert url_for("register") in self.driver.current_url
