@@ -64,7 +64,6 @@ class TestBase(LiveServerTestCase):
         )
         # adds the test data to the database
         db.session.add(admin)
-        db.session.add(testuser)
         db.session.add(testsupplier)
         db.session.add(testproduct)
         db.session.commit()
