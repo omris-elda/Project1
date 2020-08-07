@@ -185,9 +185,32 @@ class TestUserInput(TestBase):
             )
             self.assertIn(b"Stock has been added", response.data)
             self.assertEqual(response.status_code, 200)
+
+    def test_edit_product(self):
+        with self.client:
+            response = self.client.post(
+                url_for('login'),
+                data = dict(
+                    username = "test",
+                    password = "password"
+                ),
+                follow_redirects = True
+            )
+            self.assertIn(b"Home", response.data)
+            self.assertEqual(response.status_code, 200)
+            response = self.client.post(
+                url_for("edit_product", product_id = 1),
+                data = dict(
+                    product_name = "edited product",
+                    product_price = "150",
+                    supplier_name = "TestSupplier",
+                    current_stock = "150"
+                ),
+                follow_redirects = True
+            )
+            self.assertIn(b"Stock has been updated.", response.data)
+            self.assertEqual(response.status_code, 200)
 """tests for later if I get time:
-add stock
-edit product
 delete supplier
 delete product
 """
