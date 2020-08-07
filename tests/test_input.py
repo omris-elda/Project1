@@ -178,7 +178,7 @@ class TestUserInput(TestBase):
                 data = dict(
                     product_name = "New Product",
                     product_price = "1.50",
-                    supplier = "TestSupplier",
+                    supplier_name = "TestSupplier",
                     current_stock = "100"
                 ),
                 follow_redirects = True
