@@ -148,9 +148,14 @@ class TestInput(TestBase):
         self.driver.find_element_by_xpath('//*[@id="password"]').send_keys(test_admin_password)
         self.driver.find_element_by_xpath('//*[@id="submit"]').click()
         # now to go to the actual add stock page
-        self.driver.find_element_by_xpath('/html/body/div[1]/a[4]').click()
+        self.driver.find_element_by_xpath('/html/body/div/a[4]').click()
         assert url_for("add_stock") in self.driver.current_url
-        
+        self.driver.find_element_by_xpath('//*[@id="product_name"]').send_keys("test product")
+        self.driver.find_element_by_xpath('//*[@id="product_price"]').send_keys("1.50")
+        self.driver.find_element_by_xpath('//*[@id="supplier_name"]').send_keys("TestSupplier")
+        self.driver.find_element_by_xpath('//*[@id="current_stock"]').send_keys("1000")
+        self.driver.find_element_by_xpath('//*[@id="submit"]').click()
+        assert url_for("add_stock") in self.driver.current_url
         
 if __name__ == "__main__":
     unittest.main(port=5000)
