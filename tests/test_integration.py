@@ -17,6 +17,9 @@ test_admin_username =  "admin"
 test_admin_email = "admin@admin.com"
 test_admin_password = "admin"
 
+new_supplier = "newsupplier"
+new_supplier_description = "new supplier description"
+
 class TestBase(LiveServerTestCase):
     def create_app(self):
         # edit the config so that you're not overwriting any important configurations,
@@ -170,9 +173,9 @@ class TestNewSupplier(TestBase):
         # now to go to the actual add supplier page
         self.driver.find_element_by_xpath('/html/body/div/a[5]').click()
         assert url_for("add_supplier") in self.driver.current_url
-        self.driver.find_element_by_id('supplier_name').send_keys("new supplier")
-        self.driver.find_element_by_id('supplier_description').send_keys("new supplier description")
-        self.driver.find_element_by_id('submit').click()
+        self.driver.find_element_by_xpath('//*[@id="supplier_name"]').send_keys(new_supplier)
+        self.driver.find_element_by_xpath('//*[@id="supplier_description"]').send_keys(new_supplier_description)
+        self.driver.find_element_by_xpath('//*[@id="submit"]').click()
         assert url_for("add_supplier") in self.driver.current_url
         self.assertEqual(Supplier.query.count(), 2)
 
