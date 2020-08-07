@@ -251,7 +251,7 @@ class TestUserInput(TestBase):
                 follow_redirects = True
             )
             self.assertEqual(response.status_code, 200)
-            self.assertIn(b"Supplier and associated stock has been deleted.")
+            self.assertIn(b"Supplier and associated stock has been deleted.", response.data)
 
     def test_delete_product(self):
         with self.client:
