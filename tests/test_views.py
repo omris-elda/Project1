@@ -142,6 +142,7 @@ class TestUserViews(TestBase):
             response = self.client.get(url_for("edit_profile"))
             self.assertEqual(response.status_code, 200)
             self.assertIn(b"Edit Profile", response.data)
+
     def test_users_users(self):
         with self.client:
             self.client.post(
@@ -155,6 +156,7 @@ class TestUserViews(TestBase):
             response = self.client.get(url_for("user", username = "test"))
             self.assertEqual(response.status_code, 200)
             self.assertIn(b"User: ", response.data)
+
     def test_users_logout(self):
         with self.client:
             self.client.post(
@@ -168,6 +170,35 @@ class TestUserViews(TestBase):
             response = self.client.get(url_for("logout"), follow_redirects = True)
             self.assertEqual(response.status_code, 200)
             self.assertIn(b"Hello", response.data)
+            
+    def test_users_login(self):
+        with self.client:
+            self.client.post(
+                url_for("login"),
+                data = dict(
+                    username = "test",
+                    password = "password"
+                ),
+                follow_redirects = True
+            )
+            response = self.client.get(url_for("login"), follow_redirects = True)
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b"Hello", response.data)
+
+    def test_users_register(self):
+        with self.client:
+            self.client.post(
+                url_for("login"),
+                data = dict(
+                    username = "test",
+                    password = "password"
+                ),
+                follow_redirects = True
+            )
+            response = self.client.get(url_for("register"), follow_redirects = True)
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b"Hello", response.data)
+
 # tests loading the stock pages as a logged in user
 class TestStockViews(TestBase):
     def test_stock_pages(self):
