@@ -11,7 +11,7 @@ from app.models import User, Stock, Supplier
 import os
 from config import Config
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from flask_login import logout_user
 # setting the test variables for test admin user
 test_admin_username =  "admin"
 test_admin_email = "admin@admin.com"
@@ -96,7 +96,7 @@ class TestNavBar(TestBase):
 class TestInput(TestBase):
 
     def test_register(self):
-
+        logout_user()
         self.driver.find_element_by_xpath("/html/body/div/a[3]").click()
         # assert url_for("register") in self.driver.current_url
         assert url_for("register") in self.driver.current_url
@@ -144,6 +144,7 @@ class TestInput(TestBase):
         self.driver.find_element_by_xpath('//*[@id="current_stock"]').send_keys("1000")
         self.driver.find_element_by_xpath('//*[@id="submit"]').click()
         assert url_for("add_stock") in self.driver.current_url
+        self.assertEqual(Stock.query.count(), 2)
         self.driver.find_element_by_xpath("/html/body/div[1]/a[1]").click()
         
     def test_addnewsupplier(self):
