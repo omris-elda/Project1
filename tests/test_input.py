@@ -108,7 +108,7 @@ class TestUserInput(TestBase):
                 data = dict(
                     email = "new@user.com",
                     password = "password",
-                    confrim_password = "password",
+                    password2 = "password",
                     username = "NewTestUser"
                 ),
                 follow_redirects = True
