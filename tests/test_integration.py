@@ -137,6 +137,7 @@ class TestAddStock(TestBase):
         self.driver.find_element_by_xpath('//*[@id="username"]').send_keys(test_admin_username)
         self.driver.find_element_by_xpath('//*[@id="password"]').send_keys(test_admin_password)
         self.driver.find_element_by_xpath('//*[@id="submit"]').click()
+        assert url_for("index") in self.driver.current_url
         # now to go to the actual add stock page
         self.driver.find_element_by_xpath('/html/body/div/a[4]').click()
         assert url_for("add_stock") in self.driver.current_url
