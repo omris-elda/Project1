@@ -138,8 +138,53 @@ class TestUserInput(TestBase):
             self.assertIn(b"Home", response.data)
             self.assertEqual(response.status_code, 200)
 
+    def test_edit_account(self):
+        with self.client:
+            response = self.client.post(
+                url_for('login'),
+                data = dict(
+                    username = "test",
+                    password = "password"
+                ),
+                follow_redirects = True
+            )
+            self.assertIn(b"Home", response.data)
+            self.assertEqual(response.status_code, 200)
+            response = self.client.post(
+                url_for("edit_profile"),
+                data = dict(
+                    username = "updated test",
+                    email = "updated@test.com",
+                ),
+                follow_redirects = True
+            )
+            self.assertIn(b"Your changes have been saved", response.data)
+            self.assertEqual(response.status_code, 200)
+
+    def test_add_stock(self):
+        with self.client:
+            response = self.client.post(
+                url_for('login'),
+                data = dict(
+                    username = "test",
+                    password = "password"
+                ),
+                follow_redirects = True
+            )
+            self.assertIn(b"Home", response.data)
+            self.assertEqual(response.status_code, 200)
+            response = self.client.post(
+                data = dict(
+                    product_name = "New Product",
+                    product_price = "1.50",
+                    supplier = "TestSupplier",
+                    current_stock = "100"
+                ),
+                follow_redirects = True
+            )
+            self.assertIn(b"Stock has been added", response.data)
+            self.assertEqual(response.status_code, 200)
 """tests for later if I get time:
-edit profile
 add stock
 edit product
 delete supplier

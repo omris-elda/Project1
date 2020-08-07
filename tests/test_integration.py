@@ -156,6 +156,7 @@ class TestInput(TestBase):
         self.driver.find_element_by_xpath('//*[@id="current_stock"]').send_keys("1000")
         self.driver.find_element_by_xpath('//*[@id="submit"]').click()
         assert url_for("add_stock") in self.driver.current_url
+        self.driver.find_element_by_xpath("/html/body/div[1]/a[1]").click()
         
 if __name__ == "__main__":
     unittest.main(port=5000)
