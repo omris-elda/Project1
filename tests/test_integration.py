@@ -16,9 +16,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 test_admin_username =  "admin"
 test_admin_email = "admin@admin.com"
 test_admin_password = "admin"
-test_new_username = "newuser"
-test_new_email = "newtest@newtest.com"
-test_new_password = "newpassword"
 
 class TestBase(LiveServerTestCase):
     def create_app(self):
@@ -44,19 +41,12 @@ class TestBase(LiveServerTestCase):
         db.drop_all()
         db.create_all()
 
-        # creating the first test user
+        # creating a test user
         hashed_pw1 = generate_password_hash("admin")
         admin = User(
             username = "admin",
             email = "admin@admin.com",
             password_hash = hashed_pw1
-        )
-        # creating the second test user
-        hashed_pw_2 = generate_password_hash("password")
-        testuser = User(
-            username = "test",
-            email = "test@user.com",
-            password_hash = hashed_pw_2
         )
         # creating a test supplier
         testsupplier = Supplier(
@@ -112,12 +102,12 @@ class TestInput(TestBase):
         # assert url_for("register") in self.driver.current_url
         assert url_for("register") in self.driver.current_url
         # input the new test username
-        self.driver.find_element_by_xpath('//*[@id="username"]').send_keys("testnewusername")
+        self.driver.find_element_by_xpath('//*[@id="username"]').send_keys("testuser")
         # input the test user email
-        self.driver.find_element_by_xpath('//*[@id="email"]').send_keys("test@newemail.com")
+        self.driver.find_element_by_xpath('//*[@id="email"]').send_keys("test@user.com")
         # input the test user password x2
-        self.driver.find_element_by_xpath('//*[@id="password"]').send_keys("testnewpassword")
-        self.driver.find_element_by_xpath('//*[@id="password2"]').send_keys("testnewpassword")
+        self.driver.find_element_by_xpath('//*[@id="password"]').send_keys("password")
+        self.driver.find_element_by_xpath('//*[@id="password2"]').send_keys("password")
         # click the register button
         self.driver.find_element_by_xpath('//*[@id="submit"]').click()
         # checks that you've made an account and been redirected to the login page
