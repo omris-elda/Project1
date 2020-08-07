@@ -158,5 +158,21 @@ class TestInput(TestBase):
         assert url_for("add_stock") in self.driver.current_url
         self.driver.find_element_by_xpath("/html/body/div[1]/a[1]").click()
         
+    def test_addnewsupplier(self):
+
+        # you have to be logged in to add a supplier, so first we must login
+        self.driver.find_element_by_xpath("/html/body/div[1]/a[2]").click()
+        assert url_for("login") in self.driver.current_url
+        self.driver.find_element_by_xpath('//*[@id="username"]').send_keys(test_admin_username)
+        self.driver.find_element_by_xpath('//*[@id="password"]').send_keys(test_admin_password)
+        self.driver.find_element_by_xpath('//*[@id="submit"]').click()
+        # now to go to the actual add stock page
+        self.driver.find_element_by_xpath('/html/body/div/a[5]').click()
+        assert url_for("add_stock") in self.driver.current_url
+        self.driver.find_element_by_xpath('//*[@id="supplier_name"]').send_keys("new supplier")
+        self.driver.find_element_by_xpath('//*[@id="supplier_description"]').send_keys("new supplier description")
+        self.driver.find_element_by_xpath('//*[@id="submit"]').click()
+        assert url_for("add_stock") in self.driver.current_url
+        
 if __name__ == "__main__":
     unittest.main(port=5000)
