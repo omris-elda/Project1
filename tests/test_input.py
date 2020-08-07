@@ -270,4 +270,4 @@ class TestUserInput(TestBase):
                 follow_redirects = True
             )
             self.assertEqual(response.status_code, 200)
-            self.assertIn(b"Stock has been deleted.")
+            self.assertIn(b"Stock has been deleted.", response.data)
