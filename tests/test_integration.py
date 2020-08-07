@@ -22,7 +22,6 @@ test_new_password = "newpassword"
 
 class TestBase(LiveServerTestCase):
     def create_app(self):
-        basedir = os.path.abspath(os.path.dirname(__file__))
         # edit the config so that you're not overwriting any important configurations,
         # and making a new local database for testing purposes
         app.config.from_object(Config)
@@ -107,20 +106,6 @@ class TestNavBar(TestBase):
 
 class TestInput(TestBase):
 
-    def test_login(self):
-
-        self.driver.find_element_by_xpath("/html/body/div[1]/a[2]").click()
-        time.sleep(1)
-        assert url_for("login") in self.driver.current_url
-        # inputs the test admin username
-        self.driver.find_element_by_xpath('//*[@id="username"]').send_keys(test_admin_username)
-        # inputs the test admin password
-        self.driver.find_element_by_xpath('//*[@id="password"]').send_keys(test_admin_password)
-        # click the sign in button
-        self.driver.find_element_by_xpath('//*[@id="submit"]').click()
-        # checks that you've logged in correctly
-        assert url_for("index") in self.driver.current_url
-
     def test_register(self):
 
         self.driver.find_element_by_xpath("/html/body/div/a[3]").click()
@@ -139,5 +124,24 @@ class TestInput(TestBase):
         # checks that you've made an account and been redirected to the login page
         assert url_for("login") in self.driver.current_url
 
+
+    def test_login(self):
+
+        self.driver.find_element_by_xpath("/html/body/div[1]/a[2]").click()
+        time.sleep(1)
+        assert url_for("login") in self.driver.current_url
+        # inputs the test admin username
+        self.driver.find_element_by_xpath('//*[@id="username"]').send_keys(test_admin_username)
+        # inputs the test admin password
+        self.driver.find_element_by_xpath('//*[@id="password"]').send_keys(test_admin_password)
+        # click the sign in button
+        self.driver.find_element_by_xpath('//*[@id="submit"]').click()
+        # checks that you've logged in correctly
+        assert url_for("index") in self.driver.current_url
+
+    def test_addnewstock(self):
+        self.driver.find_element_by_xpath('/html/body/div[1]/a[4]').click()
+        assert url_for("add_stock") in self.driver.current_url
+        
 if __name__ == "__main__":
-    unittest.main(port=5000)
+    unittest.main()
