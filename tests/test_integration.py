@@ -112,7 +112,7 @@ class TestInput(TestBase):
         # assert url_for("register") in self.driver.current_url
         assert url_for("register") in self.driver.current_url
         # input the new test username
-        self.driver.find_element_by_xpath('//*[@id="username"]').send_keys("test_new_username")
+        self.driver.find_element_by_xpath('//*[@id="username"]').send_keys("testnewusername")
         # input the test user email
         self.driver.find_element_by_xpath('//*[@id="email"]').send_keys("test@newemail.com")
         # input the test user password x2
