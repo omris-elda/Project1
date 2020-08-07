@@ -116,8 +116,8 @@ class TestInput(TestBase):
         # input the test user email
         self.driver.find_element_by_xpath('//*[@id="email"]').send_keys("test@newemail.com")
         # input the test user password x2
-        self.driver.find_element_by_xpath('//*[@id="password"]').send_keys("test_new_password")
-        self.driver.find_element_by_xpath('//*[@id="password2"]').send_keys("test_new_password")
+        self.driver.find_element_by_xpath('//*[@id="password"]').send_keys("testnewpassword")
+        self.driver.find_element_by_xpath('//*[@id="password2"]').send_keys("testnewpassword")
         # click the register button
         self.driver.find_element_by_xpath('//*[@id="submit"]').click()
         # checks that you've made an account and been redirected to the login page
