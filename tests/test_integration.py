@@ -112,7 +112,7 @@ class TestNavBar(TestBase):
 #         # checks that you've made an account and been redirected to the login page
 #         assert url_for("login") in self.driver.current_url
 
-class TestInput(TestBase):
+class TestLogin(TestBase):
 
     def test_login(self):
 
@@ -128,6 +128,7 @@ class TestInput(TestBase):
         # checks that you've logged in correctly
         assert url_for("index") in self.driver.current_url
 
+class TestAddStock(TestBase):
     def test_addnewstock(self):
 
         # you have to be logged in to add stock, so first we must login
@@ -156,7 +157,7 @@ class TestInput(TestBase):
         assert url_for("add_stock") in self.driver.current_url
         self.assertEqual(Stock.query.count(), 2)
 
-        
+class TestNewSupplier(TestBase):
     def test_addnewsupplier(self):
 
         # you have to be logged in to add a supplier, so first we must login
@@ -172,6 +173,7 @@ class TestInput(TestBase):
         self.driver.find_element_by_xpath('//*[@id="supplier_description"]').send_keys("new supplier description")
         self.driver.find_element_by_xpath('//*[@id="submit"]').click()
         assert url_for("add_supplier") in self.driver.current_url
+        self.assertEqual(Supplier.query.count(), 2)
 
 if __name__ == "__main__":
     unittest.main(port=5000)
