@@ -174,6 +174,7 @@ class TestUserInput(TestBase):
             self.assertIn(b"Home", response.data)
             self.assertEqual(response.status_code, 200)
             response = self.client.post(
+                url_for("add_stock"),
                 data = dict(
                     product_name = "New Product",
                     product_price = "1.50",
@@ -182,7 +183,7 @@ class TestUserInput(TestBase):
                 ),
                 follow_redirects = True
             )
-            self.assertIn(b"Add Stock", response.data)
+            self.assertIn(b"Stock has been added", response.data)
             self.assertEqual(response.status_code, 200)
 """tests for later if I get time:
 add stock
