@@ -114,7 +114,7 @@ class TestInput(TestBase):
         # input the new test username
         self.driver.find_element_by_xpath('//*[@id="username"]').send_keys("test_new_username")
         # input the test user email
-        self.driver.find_element_by_xpath('//*[@id="email"]').send_keys("test_new_email")
+        self.driver.find_element_by_xpath('//*[@id="email"]').send_keys("test@newemail.com")
         # input the test user password x2
         self.driver.find_element_by_xpath('//*[@id="password"]').send_keys("test_new_password")
         self.driver.find_element_by_xpath('//*[@id="password2"]').send_keys("test_new_password")
