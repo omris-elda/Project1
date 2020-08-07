@@ -109,8 +109,8 @@ class TestInput(TestBase):
     def test_register(self):
 
         self.driver.find_element_by_xpath("/html/body/div/a[3]").click()
-        time.sleep(1)
         # assert url_for("register") in self.driver.current_url
+        assert url_for("register") in self.driver.current_url
         # input the new test username
         self.driver.find_element_by_xpath('//*[@id="username"]').send_keys("test_new_username")
         # input the test user email
@@ -120,7 +120,6 @@ class TestInput(TestBase):
         self.driver.find_element_by_xpath('//*[@id="password2"]').send_keys("test_new_password")
         # click the register button
         self.driver.find_element_by_xpath('//*[@id="submit"]').click()
-        time.sleep(1)
         # checks that you've made an account and been redirected to the login page
         assert url_for("login") in self.driver.current_url
 
