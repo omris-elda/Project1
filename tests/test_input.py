@@ -210,7 +210,64 @@ class TestUserInput(TestBase):
             )
             self.assertIn(b"Stock has been updated.", response.data)
             self.assertEqual(response.status_code, 200)
-"""tests for later if I get time:
-delete supplier
-delete product
-"""
+
+    def test_edit_supplier(self):
+        with self.client:
+            response = self.client.post(
+                url_for('login'),
+                data = dict(
+                    username = "test",
+                    password = "password"
+                ),
+                follow_redirects = True
+            )
+            self.assertIn(b"Home", response.data)
+            self.assertEqual(response.status_code, 200)
+            response = self.client.post(
+                url_for("edit_supplier", supplier_id = 1),
+                data = dict(
+                    supplier_name = "Updated Name",
+                    supplier_description = "Updated supplier description"
+                ),
+                follow_redirects = True
+            )
+            self.assertIn(b"Supplier has been updated.", response.data)
+            self.assertEqual(response.status_code, 200)
+
+    def test_delete_supplier(self):
+        with self.client:
+            response = self.client.post(
+                url_for('login'),
+                data = dict(
+                    username = "test",
+                    password = "password"
+                ),
+                follow_redirects = True
+            )
+            self.assertIn(b"Home", response.data)
+            self.assertEqual(response.status_code, 200)
+            response = self.client.post(
+                url_for("delete_supplier", supplier_id = 1),
+                follow_redirects = True
+            )
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b"Supplier and associated stock has been deleted.")
+
+    def test_delete_product(self):
+        with self.client:
+            response = self.client.post(
+                url_for('login'),
+                data = dict(
+                    username = "test",
+                    password = "password"
+                ),
+                follow_redirects = True
+            )
+            self.assertIn(b"Home", response.data)
+            self.assertEqual(response.status_code, 200)
+            response = self.client.post(
+                url_for("delete_product", product_id = 1),
+                follow_redirects = True
+            )
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b"Stock has been deleted.")
