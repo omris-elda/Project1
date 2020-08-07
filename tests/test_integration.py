@@ -93,24 +93,24 @@ class TestNavBar(TestBase):
 
         assert url_for("login") in self.driver.current_url
 
-class TestRegister(TestBase):
+# class TestRegister(TestBase):
 
-    def test_register(self):
+#     def test_register(self):
                
-        self.driver.find_element_by_xpath("/html/body/div/a[3]").click()
-        # assert url_for("register") in self.driver.current_url
-        assert url_for("register") in self.driver.current_url
-        # input the new test username
-        self.driver.find_element_by_xpath('//*[@id="username"]').send_keys("testuser")
-        # input the test user email
-        self.driver.find_element_by_xpath('//*[@id="email"]').send_keys("test@user.com")
-        # input the test user password x2
-        self.driver.find_element_by_xpath('//*[@id="password"]').send_keys("password")
-        self.driver.find_element_by_xpath('//*[@id="password2"]').send_keys("password")
-        # click the register button
-        self.driver.find_element_by_xpath('//*[@id="submit"]').click()
-        # checks that you've made an account and been redirected to the login page
-        assert url_for("login") in self.driver.current_url
+#         self.driver.find_element_by_xpath("/html/body/div/a[3]").click()
+#         # assert url_for("register") in self.driver.current_url
+#         assert url_for("register") in self.driver.current_url
+#         # input the new test username
+#         self.driver.find_element_by_xpath('//*[@id="username"]').send_keys("testuser")
+#         # input the test user email
+#         self.driver.find_element_by_xpath('//*[@id="email"]').send_keys("test@user.com")
+#         # input the test user password x2
+#         self.driver.find_element_by_xpath('//*[@id="password"]').send_keys("password")
+#         self.driver.find_element_by_xpath('//*[@id="password2"]').send_keys("password")
+#         # click the register button
+#         self.driver.find_element_by_xpath('//*[@id="submit"]').click()
+#         # checks that you've made an account and been redirected to the login page
+#         assert url_for("login") in self.driver.current_url
 
 class TestInput(TestBase):
 
@@ -145,8 +145,17 @@ class TestInput(TestBase):
         self.driver.find_element_by_xpath('//*[@id="current_stock"]').send_keys("1000")
         self.driver.find_element_by_xpath('//*[@id="submit"]').click()
         assert url_for("add_stock") in self.driver.current_url
+        self.assertEqual(Stock.query.count(), 1)
+        self.driver.find_element_by_xpath('/html/body/div/a[4]').click()
+        assert url_for("add_stock") in self.driver.current_url
+        self.driver.find_element_by_xpath('//*[@id="product_name"]').send_keys("test product")
+        self.driver.find_element_by_xpath('//*[@id="product_price"]').send_keys("1.50")
+        self.driver.find_element_by_xpath('//*[@id="supplier_name"]').send_keys("TestSupplier")
+        self.driver.find_element_by_xpath('//*[@id="current_stock"]').send_keys("1000")
+        self.driver.find_element_by_xpath('//*[@id="submit"]').click()
+        assert url_for("add_stock") in self.driver.current_url
         self.assertEqual(Stock.query.count(), 2)
-        self.driver.find_element_by_xpath("/html/body/div[1]/a[1]").click()
+
         
     def test_addnewsupplier(self):
 
