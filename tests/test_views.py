@@ -281,7 +281,7 @@ class TestSupplierViews(TestBase):
             response = self.client.get(url_for("view_supplier", supplier_id = 1))
             self.assertEqual(response.status_code, 200)
             self.assertIn(b"Details for ", response.data)
-#tests the error pages to the best of my ability
+# tests the error pages to the best of my ability
 # class TestErrors(TestBase):
 #     def test_404(self):
 #         with self.client:
