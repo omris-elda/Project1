@@ -182,7 +182,7 @@ class TestUserInput(TestBase):
                 ),
                 follow_redirects = True
             )
-            self.assertIn(b"Stock has been added", response.data)
+            self.assertIn(b"Add Stock", response.data)
             self.assertEqual(response.status_code, 200)
 """tests for later if I get time:
 add stock
