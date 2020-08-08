@@ -47,4 +47,28 @@ Current Stock - how much of that product is currently in stock
 When a user is logged in, they're also allowed to edit several fields, including:
 On their account, they can edit their username and email.
 For stock, they can edit individual products.
-For 
+For suppliers, they can edit the supplier name and ID.
+In the future, I'd like to implement being able to change the password, which in theory would be a relatively easy edit to make. I'd also like to be able to make a lost-password form, but that would require a way to contact them outside of the app which is beyond my current skill level.
+
+Architecture:
+
+When creating my database, I created a simple ERD so that I could visualise the creation of the database before actually making it, and ensure that the relationship was a viable one that would fulfill the needs of the app. It also prevented me from over-complicating the database, as I was able to see exactly what fields I had.
+
+The actual deployment of the application was done using a CI server. This allowed seamless transition from a coding environment, to the source control, to testing, and eventually to deployment.
+
+Testing:
+
+For testing I used Pythons unittest module, as well as Selenium for integration testing. With these technologies I achieved a 93% coverage with my tests, meaning that the vast majority of my application was tested in one way or another.
+
+Future Improvements:
+In the future I'd like to implement separate databases for each user, or specific groups of users, so that most users can only access their own database. This would allow for expansion of the service provided, as it could service multiple different sites, each with their own stock database.
+I'd also like to implement a page where I can view all of the suppliers, so that I can edit them easily. A search function that searches both the suppliers and the stock would also be helpful, preferably with a filter so that you can search for either or.
+There is also more validation that could be implemented to ensure that the data being entered is valid and correct, and that data cannot be easily deleted.
+
+
+Author:
+Ed Prickett
+
+Acknowledgements:
+CA Academy for teaching me the skills to implement this project.
+Luke Benson for being patient with my many questions.
