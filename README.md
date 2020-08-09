@@ -58,7 +58,7 @@ When creating my database, I created a simple ERD so that I could visualise the 
 
 The actual deployment of the application was done using a CI server. This allowed seamless transition from a coding environment, to the source control, to testing, and eventually to deployment.
 
-![CI Pipeline goes here](./Dcoumentation/ciprocesses.png)
+![CI Pipeline goes here](./Documentation/ciprocesses.png)
 
 The above image shows the workflow of my code, from coding, to my source control, through testing, and onto deployment if the testing succeeds.
 To go into a little more depth, when I edit any code and push it to GitHub, GitHub will send out a packet to Jenkins, letting it know that a change has been made, and that it should start the process of testing and rebuilding the application. Jenkins then starts the testing job, and if completed successfully (meaning all the tests passed), then it will then start to build the application from the master branch on GitHub. This means that should the tests fail, the built project will stay as the branch that works so that no errors are introduced to the deployed application in the chance that someone has pushed broken code to the master branch.
