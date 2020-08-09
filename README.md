@@ -54,6 +54,9 @@ Architecture:
 
 When creating my database, I created a simple ERD so that I could visualise the creation of the database before actually making it, and ensure that the relationship was a viable one that would fulfill the needs of the app. It also prevented me from over-complicating the database, as I was able to see exactly what fields I had.
 
+![My ERD Diagram](./Documentation/ERD.png)
+
+
 The actual deployment of the application was done using a CI server. This allowed seamless transition from a coding environment, to the source control, to testing, and eventually to deployment.
 
 Testing:
