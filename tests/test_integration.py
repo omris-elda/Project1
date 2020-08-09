@@ -17,7 +17,7 @@ test_admin_username =  "admin"
 test_admin_email = "admin@admin.com"
 test_admin_password = "admin"
 
-new_supplier = "newsupplier"
+new_supplier = "secondnewsupplier"
 new_supplier_description = "new supplier description"
 
 class TestBase(LiveServerTestCase):
