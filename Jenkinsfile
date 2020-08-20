@@ -9,11 +9,11 @@ pipeline {
                 sh "python3 -m pytest"
             }
         }
-        stage("Run tests") {
-            steps{
-                sh "pytest"
-            }
-        }
+        // stage("Run tests") {
+        //     steps{
+        //         sh "pytest"
+        //     }
+        // }
         stage("Run program") {
             steps{
                 sh "python3 project1.py"
