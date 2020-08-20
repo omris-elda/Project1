@@ -15,7 +15,7 @@ pipeline {
         // }
         stage("Run program") {
             steps{
-                sh "python3 project1.py"
+                sh "gunicorn --workers=5 project1.py"
             }
         }
     }
